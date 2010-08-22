@@ -12,5 +12,8 @@ my $build = Module::Build->new(
         'IO::Select'            => '0',
         'Class::Accessor::Fast' => '0',
     },
+    meta_add => {
+        repository => 'git://github.com/ashb/net-stomp.git',
+    },
 );
 $build->create_build_script;
