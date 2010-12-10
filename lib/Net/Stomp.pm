@@ -505,6 +505,31 @@ If you want to pass in L<IO::Socket::SSL> options:
     ssl_options => { SSL_cipher_list => 'ALL:!EXPORT' },
   } );
 
+
+=head3 Parameters:
+
+'hostname'
+
+ Specifies the hostname of the Stomp server
+
+'port'
+
+ Specified the port of the Stomp server
+
+'ssl'
+
+'ssl_options'
+
+'reconnect' (defaults to true)
+
+ Specifies whether Net::Stomp should continue trying to reconnect if the connection is dropped.
+ This is enabled by default, and has the potential to get stuck in a loop should the server go away or malfunction.
+ Defaults to true. You should consider setting reconnect => 0 if your application is mission critical, but your Net::Stomp event is not.
+
+'timeout' (defaults to 5 seconds)
+
+  Specify the number of seconds, after which each connection attempt should abort.
+
 =head3 Failover
 
 There is experiemental failover support in Net::Stomp. You can specify failover
