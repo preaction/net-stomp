@@ -13,7 +13,7 @@ my $build = Module::Build->new(
         'Class::Accessor::Fast' => '0',
     },
     meta_add => {
-        repository => 'git://github.com/ashb/net-stomp.git',
+        repository => 'git://github.com/jasontang/net-stomp.git',
     },
 );
 $build->create_build_script;
