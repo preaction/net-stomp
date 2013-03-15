@@ -263,22 +263,22 @@ sub send_frame {
         if (not defined $self->_connected) {
             warn q{wasn't connected; couldn't _reconnect()};
         }
-    }    
+    }
     # syswrite doesnt work on > 16384 messages, EPIC fail.
-	my $frame_octets = $frame->as_string;
-	my $frame_length = length($frame_octets);
-	my $frame_left = $frame_length;
-	my $offset = 0;
-	my $written;
-	do {
-		my $bufsize = ($frame_left > 4096) ? 4096 : $frame_left;
-		
-		$written = $self->socket->syswrite($frame_octets, $bufsize, $offset);
-		if( defined $written && $written > 0 ) {
-			$offset += $written;
-			$frame_left -= $written;
-		}
-	} until ( $offset >= $frame_length || ! defined($written) || $written <= 0  );
+    my $frame_octets = $frame->as_string;
+    my $frame_length = length($frame_octets);
+    my $frame_left = $frame_length;
+    my $offset = 0;
+    my $written;
+    do {
+        my $bufsize = ($frame_left > 4096) ? 4096 : $frame_left;
+
+        $written = $self->socket->syswrite($frame_octets, $bufsize, $offset);
+        if( defined $written && $written > 0 ) {
+            $offset += $written;
+            $frame_left -= $written;
+        }
+    } until ( $offset >= $frame_length || ! defined($written) || $written <= 0  );
 
     my $connected = $self->socket->connected;
     unless (defined $connected) {
